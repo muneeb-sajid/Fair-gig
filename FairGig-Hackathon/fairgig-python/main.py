@@ -42,12 +42,10 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 # ==========================================
 # DATABASE SETUP (SQLite)
 # ==========================================
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./fairgig.db")
-# For PostgreSQL (no check_same_thread)
-if "sqlite" in DATABASE_URL:
-    engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-else:
-    engine = create_engine(DATABASE_URL)
+# Direct PostgreSQL connection (hardcoded for testing)
+# DATABASE SETUP (PostgreSQL)
+DATABASE_URL = "postgresql://fairgig_user:AqIesu4vDIc7N9pr9aUrqHzk7n2XP8QW@dpg-d7i49s1f9bms73furuv0-a/fairgig"
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
