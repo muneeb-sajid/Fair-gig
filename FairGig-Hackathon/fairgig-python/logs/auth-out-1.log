@@ -1,0 +1,23 @@
+2026-04-18T18:09:43: INFO:     127.0.0.1:59708 - "GET /api/health HTTP/1.1" 200 OK
+2026-04-18T18:16:25: INFO:     127.0.0.1:54742 - "POST /api/auth/register HTTP/1.1" 201 Created
+2026-04-18T18:18:33: INFO:     127.0.0.1:62785 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-04-18T18:21:06: INFO:     127.0.0.1:64992 - "GET /api/auth/profile HTTP/1.1" 200 OK
+2026-04-18T18:36:42: INFO:     127.0.0.1:50094 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:37:13: INFO:     127.0.0.1:58564 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:06: INFO:     127.0.0.1:55454 - "GET /api/health HTTP/1.1" 200 OK
+2026-04-18T18:38:21: INFO:     127.0.0.1:55465 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:54: INFO:     127.0.0.1:55743 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:58: INFO:     127.0.0.1:55743 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:39:49: INFO:     127.0.0.1:49684 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:39:58: INFO:     127.0.0.1:49688 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:41:01: INFO:     127.0.0.1:58787 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:42:05: INFO:     127.0.0.1:63438 - "POST /api/auth/register HTTP/1.1" 400 Bad Request
+2026-04-18T18:43:19: INFO:     127.0.0.1:64698 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:44:45: INFO:     127.0.0.1:50686 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:44:55: INFO:     127.0.0.1:50697 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:17: INFO:     127.0.0.1:63075 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:42: INFO:     127.0.0.1:56127 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:48: INFO:     127.0.0.1:56131 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:46:29: INFO:     127.0.0.1:63002 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-04-18T18:47:49: INFO:     127.0.0.1:58171 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:47:54: INFO:     127.0.0.1:58176 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error

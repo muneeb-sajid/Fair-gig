@@ -1,0 +1,1075 @@
+2026-04-18T17:49:01: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T17:49:01:   Base = declarative_base()
+2026-04-18T17:49:01: INFO:     Started server process [27912]
+2026-04-18T17:49:01: INFO:     Waiting for application startup.
+2026-04-18T17:49:01: INFO:     Application startup complete.
+2026-04-18T17:49:01: INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-18T17:51:34: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T17:51:34:   Base = declarative_base()
+2026-04-18T17:51:34: INFO:     Started server process [29376]
+2026-04-18T17:51:34: INFO:     Waiting for application startup.
+2026-04-18T17:51:34: INFO:     Application startup complete.
+2026-04-18T17:51:34: INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-18T17:51:42: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T17:51:42:   Base = declarative_base()
+2026-04-18T17:51:42: INFO:     Started server process [4108]
+2026-04-18T17:51:42: INFO:     Waiting for application startup.
+2026-04-18T17:51:42: INFO:     Application startup complete.
+2026-04-18T17:51:42: INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-18T17:51:53: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T17:51:53:   Base = declarative_base()
+2026-04-18T17:51:54: INFO:     Started server process [27796]
+2026-04-18T17:51:54: INFO:     Waiting for application startup.
+2026-04-18T17:51:54: INFO:     Application startup complete.
+2026-04-18T17:51:54: INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-18T18:09:43: INFO:     127.0.0.1:59708 - "GET /api/health HTTP/1.1" 200 OK
+2026-04-18T18:16:25: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:105: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+2026-04-18T18:16:25:   expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+2026-04-18T18:16:25: INFO:     127.0.0.1:54742 - "POST /api/auth/register HTTP/1.1" 201 Created
+2026-04-18T18:18:33: INFO:     127.0.0.1:62785 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-04-18T18:21:06: INFO:     127.0.0.1:64992 - "GET /api/auth/profile HTTP/1.1" 200 OK
+2026-04-18T18:36:42: INFO:     127.0.0.1:50094 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:36:43: ERROR:    Exception in ASGI application
+2026-04-18T18:36:43: Traceback (most recent call last):
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:36:43:     self.dialect.do_execute(
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:36:43:     cursor.execute(statement, parameters)
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43: sqlite3.OperationalError: table earnings has no column named screenshot
+2026-04-18T18:36:43: 
+2026-04-18T18:36:43: The above exception was the direct cause of the following exception:
+2026-04-18T18:36:43: 
+2026-04-18T18:36:43: Traceback (most recent call last):
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+2026-04-18T18:36:43:     result = await app(  # type: ignore[func-returns-value]
+2026-04-18T18:36:43:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:         self.scope, self.receive, self.send
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+2026-04-18T18:36:43:     return await self.app(scope, receive, send)
+2026-04-18T18:36:43:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+2026-04-18T18:36:43:     await super().__call__(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+2026-04-18T18:36:43:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+2026-04-18T18:36:43:     raise exc
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+2026-04-18T18:36:43:     await self.app(scope, receive, _send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+2026-04-18T18:36:43:     await self.app(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+2026-04-18T18:36:43:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:36:43:     raise exc
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:36:43:     await app(scope, receive, sender)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+2026-04-18T18:36:43:     await self.app(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+2026-04-18T18:36:43:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 680, in app
+2026-04-18T18:36:43:     await route.handle(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+2026-04-18T18:36:43:     await self.app(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 134, in app
+2026-04-18T18:36:43:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:36:43:     raise exc
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:36:43:     await app(scope, receive, sender)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+2026-04-18T18:36:43:     response = await f(request)
+2026-04-18T18:36:43:                ^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 674, in app
+2026-04-18T18:36:43:     raw_response = await run_endpoint_function(
+2026-04-18T18:36:43:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     ...<3 lines>...
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 328, in run_endpoint_function
+2026-04-18T18:36:43:     return await dependant.call(**values)
+2026-04-18T18:36:43:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py", line 636, in add_earnings
+2026-04-18T18:36:43:     db.commit()
+2026-04-18T18:36:43:     ~~~~~~~~~^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+2026-04-18T18:36:43:     trans.commit(_to_root=True)
+2026-04-18T18:36:43:     ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:   File "<string>", line 2, in commit
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:36:43:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+2026-04-18T18:36:43:     self._prepare_impl()
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:36:43:   File "<string>", line 2, in _prepare_impl
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:36:43:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+2026-04-18T18:36:43:     self.session.flush()
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+2026-04-18T18:36:43:     self._flush(objects)
+2026-04-18T18:36:43:     ~~~~~~~~~~~^^^^^^^^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+2026-04-18T18:36:43:     with util.safe_reraise():
+2026-04-18T18:36:43:          ~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+2026-04-18T18:36:43:     raise exc_value.with_traceback(exc_tb)
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+2026-04-18T18:36:43:     flush_context.execute()
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+2026-04-18T18:36:43:     rec.execute(self)
+2026-04-18T18:36:43:     ~~~~~~~~~~~^^^^^^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+2026-04-18T18:36:43:     util.preloaded.orm_persistence.save_obj(
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         self.mapper,
+2026-04-18T18:36:43:         ^^^^^^^^^^^^
+2026-04-18T18:36:43:         uow.states_for_mapper_hierarchy(self.mapper, False, False),
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:         uow,
+2026-04-18T18:36:43:         ^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+2026-04-18T18:36:43:     _emit_insert_statements(
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         base_mapper,
+2026-04-18T18:36:43:         ^^^^^^^^^^^^
+2026-04-18T18:36:43:     ...<3 lines>...
+2026-04-18T18:36:43:         insert,
+2026-04-18T18:36:43:         ^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+2026-04-18T18:36:43:     result = connection.execute(
+2026-04-18T18:36:43:         statement,
+2026-04-18T18:36:43:         params,
+2026-04-18T18:36:43:         execution_options=execution_options,
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+2026-04-18T18:36:43:     return meth(
+2026-04-18T18:36:43:         self,
+2026-04-18T18:36:43:         distilled_parameters,
+2026-04-18T18:36:43:         execution_options or NO_OPTIONS,
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+2026-04-18T18:36:43:     return connection._execute_clauseelement(
+2026-04-18T18:36:43:            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         self, distilled_params, execution_options
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+2026-04-18T18:36:43:     ret = self._execute_context(
+2026-04-18T18:36:43:         dialect,
+2026-04-18T18:36:43:     ...<8 lines>...
+2026-04-18T18:36:43:         cache_hit=cache_hit,
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+2026-04-18T18:36:43:     return self._exec_single_context(
+2026-04-18T18:36:43:            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         dialect, context, statement, parameters
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+2026-04-18T18:36:43:     self._handle_dbapi_exception(
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         e, str_statement, effective_parameters, cursor, context
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+2026-04-18T18:36:43:     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:36:43:     self.dialect.do_execute(
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:36:43:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:36:43:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43:     )
+2026-04-18T18:36:43:     ^
+2026-04-18T18:36:43:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:36:43:     cursor.execute(statement, parameters)
+2026-04-18T18:36:43:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:36:43: sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table earnings has no column named screenshot
+2026-04-18T18:36:43: [SQL: INSERT INTO earnings (worker_id, amount, platform, date, hours, gross, deductions, screenshot, verified, verified_by, verified_at, flag_reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2026-04-18T18:36:43: [parameters: (203, 5000.0, 'uber', '2024-04-18', 8.0, 5500.0, 500.0, 'worker_203_20260418_183642_download.jpg', 'pending', None, None, None, '2026-04-19 01:36:42.947720')]
+2026-04-18T18:36:43: (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-18T18:37:13: INFO:     127.0.0.1:58564 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:06: INFO:     127.0.0.1:55454 - "GET /api/health HTTP/1.1" 200 OK
+2026-04-18T18:38:21: INFO:     127.0.0.1:55465 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:54: INFO:     127.0.0.1:55743 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:38:58: INFO:     127.0.0.1:55743 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:39:49: INFO:     127.0.0.1:49684 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:39:58: INFO:     127.0.0.1:49688 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:41:01: INFO:     127.0.0.1:58787 - "POST /api/register HTTP/1.1" 404 Not Found
+2026-04-18T18:42:05: INFO:     127.0.0.1:63438 - "POST /api/auth/register HTTP/1.1" 400 Bad Request
+2026-04-18T18:43:19: INFO:     127.0.0.1:64698 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:43:19: ERROR:    Exception in ASGI application
+2026-04-18T18:43:19: Traceback (most recent call last):
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:43:19:     self.dialect.do_execute(
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:43:19:     cursor.execute(statement, parameters)
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19: sqlite3.OperationalError: table earnings has no column named screenshot
+2026-04-18T18:43:19: 
+2026-04-18T18:43:19: The above exception was the direct cause of the following exception:
+2026-04-18T18:43:19: 
+2026-04-18T18:43:19: Traceback (most recent call last):
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+2026-04-18T18:43:19:     result = await app(  # type: ignore[func-returns-value]
+2026-04-18T18:43:19:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:         self.scope, self.receive, self.send
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+2026-04-18T18:43:19:     return await self.app(scope, receive, send)
+2026-04-18T18:43:19:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+2026-04-18T18:43:19:     await super().__call__(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+2026-04-18T18:43:19:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+2026-04-18T18:43:19:     raise exc
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+2026-04-18T18:43:19:     await self.app(scope, receive, _send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+2026-04-18T18:43:19:     await self.app(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+2026-04-18T18:43:19:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:43:19:     raise exc
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:43:19:     await app(scope, receive, sender)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+2026-04-18T18:43:19:     await self.app(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+2026-04-18T18:43:19:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 680, in app
+2026-04-18T18:43:19:     await route.handle(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+2026-04-18T18:43:19:     await self.app(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 134, in app
+2026-04-18T18:43:19:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:43:19:     raise exc
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:43:19:     await app(scope, receive, sender)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+2026-04-18T18:43:19:     response = await f(request)
+2026-04-18T18:43:19:                ^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 674, in app
+2026-04-18T18:43:19:     raw_response = await run_endpoint_function(
+2026-04-18T18:43:19:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     ...<3 lines>...
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 328, in run_endpoint_function
+2026-04-18T18:43:19:     return await dependant.call(**values)
+2026-04-18T18:43:19:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py", line 636, in add_earnings
+2026-04-18T18:43:19:     db.commit()
+2026-04-18T18:43:19:     ~~~~~~~~~^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+2026-04-18T18:43:19:     trans.commit(_to_root=True)
+2026-04-18T18:43:19:     ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:   File "<string>", line 2, in commit
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:43:19:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+2026-04-18T18:43:19:     self._prepare_impl()
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:43:19:   File "<string>", line 2, in _prepare_impl
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:43:19:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+2026-04-18T18:43:19:     self.session.flush()
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+2026-04-18T18:43:19:     self._flush(objects)
+2026-04-18T18:43:19:     ~~~~~~~~~~~^^^^^^^^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+2026-04-18T18:43:19:     with util.safe_reraise():
+2026-04-18T18:43:19:          ~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+2026-04-18T18:43:19:     raise exc_value.with_traceback(exc_tb)
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+2026-04-18T18:43:19:     flush_context.execute()
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+2026-04-18T18:43:19:     rec.execute(self)
+2026-04-18T18:43:19:     ~~~~~~~~~~~^^^^^^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+2026-04-18T18:43:19:     util.preloaded.orm_persistence.save_obj(
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         self.mapper,
+2026-04-18T18:43:19:         ^^^^^^^^^^^^
+2026-04-18T18:43:19:         uow.states_for_mapper_hierarchy(self.mapper, False, False),
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:         uow,
+2026-04-18T18:43:19:         ^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+2026-04-18T18:43:19:     _emit_insert_statements(
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         base_mapper,
+2026-04-18T18:43:19:         ^^^^^^^^^^^^
+2026-04-18T18:43:19:     ...<3 lines>...
+2026-04-18T18:43:19:         insert,
+2026-04-18T18:43:19:         ^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+2026-04-18T18:43:19:     result = connection.execute(
+2026-04-18T18:43:19:         statement,
+2026-04-18T18:43:19:         params,
+2026-04-18T18:43:19:         execution_options=execution_options,
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+2026-04-18T18:43:19:     return meth(
+2026-04-18T18:43:19:         self,
+2026-04-18T18:43:19:         distilled_parameters,
+2026-04-18T18:43:19:         execution_options or NO_OPTIONS,
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+2026-04-18T18:43:19:     return connection._execute_clauseelement(
+2026-04-18T18:43:19:            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         self, distilled_params, execution_options
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+2026-04-18T18:43:19:     ret = self._execute_context(
+2026-04-18T18:43:19:         dialect,
+2026-04-18T18:43:19:     ...<8 lines>...
+2026-04-18T18:43:19:         cache_hit=cache_hit,
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+2026-04-18T18:43:19:     return self._exec_single_context(
+2026-04-18T18:43:19:            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         dialect, context, statement, parameters
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+2026-04-18T18:43:19:     self._handle_dbapi_exception(
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         e, str_statement, effective_parameters, cursor, context
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+2026-04-18T18:43:19:     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:43:19:     self.dialect.do_execute(
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:43:19:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:43:19:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19:     )
+2026-04-18T18:43:19:     ^
+2026-04-18T18:43:19:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:43:19:     cursor.execute(statement, parameters)
+2026-04-18T18:43:19:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:43:19: sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table earnings has no column named screenshot
+2026-04-18T18:43:19: [SQL: INSERT INTO earnings (worker_id, amount, platform, date, hours, gross, deductions, screenshot, verified, verified_by, verified_at, flag_reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2026-04-18T18:43:19: [parameters: (203, 5000.0, 'uber', '2024-04-18', 8.0, 5500.0, 500.0, 'worker_203_20260418_184319_download.jpg', 'pending', None, None, None, '2026-04-19 01:43:19.596165')]
+2026-04-18T18:43:19: (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-18T18:44:45: INFO:     127.0.0.1:50686 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:44:55: INFO:     127.0.0.1:50697 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:17: INFO:     127.0.0.1:63075 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:42: INFO:     127.0.0.1:56127 - "GET /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:45:48: INFO:     127.0.0.1:56131 - "POST /api/login HTTP/1.1" 404 Not Found
+2026-04-18T18:46:29: INFO:     127.0.0.1:63002 - "POST /api/auth/login HTTP/1.1" 200 OK
+2026-04-18T18:47:49: INFO:     127.0.0.1:58171 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:47:49: ERROR:    Exception in ASGI application
+2026-04-18T18:47:49: Traceback (most recent call last):
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:47:49:     self.dialect.do_execute(
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:47:49:     cursor.execute(statement, parameters)
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49: sqlite3.OperationalError: table earnings has no column named screenshot
+2026-04-18T18:47:49: 
+2026-04-18T18:47:49: The above exception was the direct cause of the following exception:
+2026-04-18T18:47:49: 
+2026-04-18T18:47:49: Traceback (most recent call last):
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+2026-04-18T18:47:49:     result = await app(  # type: ignore[func-returns-value]
+2026-04-18T18:47:49:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:         self.scope, self.receive, self.send
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+2026-04-18T18:47:49:     return await self.app(scope, receive, send)
+2026-04-18T18:47:49:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+2026-04-18T18:47:49:     await super().__call__(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+2026-04-18T18:47:49:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+2026-04-18T18:47:49:     raise exc
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+2026-04-18T18:47:49:     await self.app(scope, receive, _send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+2026-04-18T18:47:49:     await self.app(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+2026-04-18T18:47:49:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:47:49:     raise exc
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:47:49:     await app(scope, receive, sender)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+2026-04-18T18:47:49:     await self.app(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+2026-04-18T18:47:49:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 680, in app
+2026-04-18T18:47:49:     await route.handle(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+2026-04-18T18:47:49:     await self.app(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 134, in app
+2026-04-18T18:47:49:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:47:49:     raise exc
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:47:49:     await app(scope, receive, sender)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+2026-04-18T18:47:49:     response = await f(request)
+2026-04-18T18:47:49:                ^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 674, in app
+2026-04-18T18:47:49:     raw_response = await run_endpoint_function(
+2026-04-18T18:47:49:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     ...<3 lines>...
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 328, in run_endpoint_function
+2026-04-18T18:47:49:     return await dependant.call(**values)
+2026-04-18T18:47:49:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py", line 636, in add_earnings
+2026-04-18T18:47:49:     db.commit()
+2026-04-18T18:47:49:     ~~~~~~~~~^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+2026-04-18T18:47:49:     trans.commit(_to_root=True)
+2026-04-18T18:47:49:     ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:   File "<string>", line 2, in commit
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:47:49:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+2026-04-18T18:47:49:     self._prepare_impl()
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:49:   File "<string>", line 2, in _prepare_impl
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:47:49:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+2026-04-18T18:47:49:     self.session.flush()
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+2026-04-18T18:47:49:     self._flush(objects)
+2026-04-18T18:47:49:     ~~~~~~~~~~~^^^^^^^^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+2026-04-18T18:47:49:     with util.safe_reraise():
+2026-04-18T18:47:49:          ~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+2026-04-18T18:47:49:     raise exc_value.with_traceback(exc_tb)
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+2026-04-18T18:47:49:     flush_context.execute()
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+2026-04-18T18:47:49:     rec.execute(self)
+2026-04-18T18:47:49:     ~~~~~~~~~~~^^^^^^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+2026-04-18T18:47:49:     util.preloaded.orm_persistence.save_obj(
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         self.mapper,
+2026-04-18T18:47:49:         ^^^^^^^^^^^^
+2026-04-18T18:47:49:         uow.states_for_mapper_hierarchy(self.mapper, False, False),
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:         uow,
+2026-04-18T18:47:49:         ^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+2026-04-18T18:47:49:     _emit_insert_statements(
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         base_mapper,
+2026-04-18T18:47:49:         ^^^^^^^^^^^^
+2026-04-18T18:47:49:     ...<3 lines>...
+2026-04-18T18:47:49:         insert,
+2026-04-18T18:47:49:         ^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+2026-04-18T18:47:49:     result = connection.execute(
+2026-04-18T18:47:49:         statement,
+2026-04-18T18:47:49:         params,
+2026-04-18T18:47:49:         execution_options=execution_options,
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+2026-04-18T18:47:49:     return meth(
+2026-04-18T18:47:49:         self,
+2026-04-18T18:47:49:         distilled_parameters,
+2026-04-18T18:47:49:         execution_options or NO_OPTIONS,
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+2026-04-18T18:47:49:     return connection._execute_clauseelement(
+2026-04-18T18:47:49:            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         self, distilled_params, execution_options
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+2026-04-18T18:47:49:     ret = self._execute_context(
+2026-04-18T18:47:49:         dialect,
+2026-04-18T18:47:49:     ...<8 lines>...
+2026-04-18T18:47:49:         cache_hit=cache_hit,
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+2026-04-18T18:47:49:     return self._exec_single_context(
+2026-04-18T18:47:49:            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         dialect, context, statement, parameters
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+2026-04-18T18:47:49:     self._handle_dbapi_exception(
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         e, str_statement, effective_parameters, cursor, context
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+2026-04-18T18:47:49:     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:47:49:     self.dialect.do_execute(
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:49:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:47:49:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49:     )
+2026-04-18T18:47:49:     ^
+2026-04-18T18:47:49:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:47:49:     cursor.execute(statement, parameters)
+2026-04-18T18:47:49:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:49: sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table earnings has no column named screenshot
+2026-04-18T18:47:49: [SQL: INSERT INTO earnings (worker_id, amount, platform, date, hours, gross, deductions, screenshot, verified, verified_by, verified_at, flag_reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2026-04-18T18:47:49: [parameters: (203, 5000.0, 'uber', '2024-04-18', 8.0, 5500.0, 500.0, None, 'pending', None, None, None, '2026-04-19 01:47:49.742871')]
+2026-04-18T18:47:49: (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-18T18:47:54: INFO:     127.0.0.1:58176 - "POST /api/earnings HTTP/1.1" 500 Internal Server Error
+2026-04-18T18:47:54: ERROR:    Exception in ASGI application
+2026-04-18T18:47:54: Traceback (most recent call last):
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:47:54:     self.dialect.do_execute(
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:47:54:     cursor.execute(statement, parameters)
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54: sqlite3.OperationalError: table earnings has no column named screenshot
+2026-04-18T18:47:54: 
+2026-04-18T18:47:54: The above exception was the direct cause of the following exception:
+2026-04-18T18:47:54: 
+2026-04-18T18:47:54: Traceback (most recent call last):
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+2026-04-18T18:47:54:     result = await app(  # type: ignore[func-returns-value]
+2026-04-18T18:47:54:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:         self.scope, self.receive, self.send
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+2026-04-18T18:47:54:     return await self.app(scope, receive, send)
+2026-04-18T18:47:54:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\applications.py", line 1159, in __call__
+2026-04-18T18:47:54:     await super().__call__(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+2026-04-18T18:47:54:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+2026-04-18T18:47:54:     raise exc
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+2026-04-18T18:47:54:     await self.app(scope, receive, _send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+2026-04-18T18:47:54:     await self.app(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+2026-04-18T18:47:54:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:47:54:     raise exc
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:47:54:     await app(scope, receive, sender)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+2026-04-18T18:47:54:     await self.app(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+2026-04-18T18:47:54:     await self.middleware_stack(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 680, in app
+2026-04-18T18:47:54:     await route.handle(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+2026-04-18T18:47:54:     await self.app(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 134, in app
+2026-04-18T18:47:54:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+2026-04-18T18:47:54:     raise exc
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+2026-04-18T18:47:54:     await app(scope, receive, sender)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+2026-04-18T18:47:54:     response = await f(request)
+2026-04-18T18:47:54:                ^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 674, in app
+2026-04-18T18:47:54:     raw_response = await run_endpoint_function(
+2026-04-18T18:47:54:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     ...<3 lines>...
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\fastapi\routing.py", line 328, in run_endpoint_function
+2026-04-18T18:47:54:     return await dependant.call(**values)
+2026-04-18T18:47:54:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py", line 636, in add_earnings
+2026-04-18T18:47:54:     db.commit()
+2026-04-18T18:47:54:     ~~~~~~~~~^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+2026-04-18T18:47:54:     trans.commit(_to_root=True)
+2026-04-18T18:47:54:     ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:   File "<string>", line 2, in commit
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:47:54:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+2026-04-18T18:47:54:     self._prepare_impl()
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:54:   File "<string>", line 2, in _prepare_impl
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+2026-04-18T18:47:54:     ret_value = fn(self, *arg, **kw)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+2026-04-18T18:47:54:     self.session.flush()
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+2026-04-18T18:47:54:     self._flush(objects)
+2026-04-18T18:47:54:     ~~~~~~~~~~~^^^^^^^^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+2026-04-18T18:47:54:     with util.safe_reraise():
+2026-04-18T18:47:54:          ~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+2026-04-18T18:47:54:     raise exc_value.with_traceback(exc_tb)
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+2026-04-18T18:47:54:     flush_context.execute()
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+2026-04-18T18:47:54:     rec.execute(self)
+2026-04-18T18:47:54:     ~~~~~~~~~~~^^^^^^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+2026-04-18T18:47:54:     util.preloaded.orm_persistence.save_obj(
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         self.mapper,
+2026-04-18T18:47:54:         ^^^^^^^^^^^^
+2026-04-18T18:47:54:         uow.states_for_mapper_hierarchy(self.mapper, False, False),
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:         uow,
+2026-04-18T18:47:54:         ^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+2026-04-18T18:47:54:     _emit_insert_statements(
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         base_mapper,
+2026-04-18T18:47:54:         ^^^^^^^^^^^^
+2026-04-18T18:47:54:     ...<3 lines>...
+2026-04-18T18:47:54:         insert,
+2026-04-18T18:47:54:         ^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+2026-04-18T18:47:54:     result = connection.execute(
+2026-04-18T18:47:54:         statement,
+2026-04-18T18:47:54:         params,
+2026-04-18T18:47:54:         execution_options=execution_options,
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+2026-04-18T18:47:54:     return meth(
+2026-04-18T18:47:54:         self,
+2026-04-18T18:47:54:         distilled_parameters,
+2026-04-18T18:47:54:         execution_options or NO_OPTIONS,
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+2026-04-18T18:47:54:     return connection._execute_clauseelement(
+2026-04-18T18:47:54:            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         self, distilled_params, execution_options
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+2026-04-18T18:47:54:     ret = self._execute_context(
+2026-04-18T18:47:54:         dialect,
+2026-04-18T18:47:54:     ...<8 lines>...
+2026-04-18T18:47:54:         cache_hit=cache_hit,
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+2026-04-18T18:47:54:     return self._exec_single_context(
+2026-04-18T18:47:54:            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         dialect, context, statement, parameters
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+2026-04-18T18:47:54:     self._handle_dbapi_exception(
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         e, str_statement, effective_parameters, cursor, context
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+2026-04-18T18:47:54:     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+2026-04-18T18:47:54:     self.dialect.do_execute(
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~~~~~~~~~~^
+2026-04-18T18:47:54:         cursor, str_statement, effective_parameters, context
+2026-04-18T18:47:54:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54:     )
+2026-04-18T18:47:54:     ^
+2026-04-18T18:47:54:   File "C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+2026-04-18T18:47:54:     cursor.execute(statement, parameters)
+2026-04-18T18:47:54:     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-18T18:47:54: sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table earnings has no column named screenshot
+2026-04-18T18:47:54: [SQL: INSERT INTO earnings (worker_id, amount, platform, date, hours, gross, deductions, screenshot, verified, verified_by, verified_at, flag_reason, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+2026-04-18T18:47:54: [parameters: (203, 5000.0, 'uber', '2024-04-18', 8.0, 5500.0, 500.0, 'worker_203_20260418_184754_download.jpg', 'pending', None, None, None, '2026-04-19 01:47:54.785152')]
+2026-04-18T18:47:54: (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-18T18:56:24: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T18:56:24:   Base = declarative_base()
+2026-04-18T18:56:25: INFO:     Started server process [23864]
+2026-04-18T18:56:25: INFO:     Waiting for application startup.
+2026-04-18T18:56:25: INFO:     Application startup complete.
+2026-04-18T18:56:25: INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-18T20:12:39: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:39:   Base = declarative_base()
+2026-04-18T20:12:39: INFO:     Started server process [12804]
+2026-04-18T20:12:39: INFO:     Waiting for application startup.
+2026-04-18T20:12:39: INFO:     Application startup complete.
+2026-04-18T20:12:39: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:39: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:39: INFO:     Application shutdown complete.
+2026-04-18T20:12:41: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:41:   Base = declarative_base()
+2026-04-18T20:12:41: INFO:     Started server process [2220]
+2026-04-18T20:12:41: INFO:     Waiting for application startup.
+2026-04-18T20:12:41: INFO:     Application startup complete.
+2026-04-18T20:12:41: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:41: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:41: INFO:     Application shutdown complete.
+2026-04-18T20:12:42: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:42:   Base = declarative_base()
+2026-04-18T20:12:42: INFO:     Started server process [23888]
+2026-04-18T20:12:42: INFO:     Waiting for application startup.
+2026-04-18T20:12:42: INFO:     Application startup complete.
+2026-04-18T20:12:42: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:42: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:42: INFO:     Application shutdown complete.
+2026-04-18T20:12:44: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:44:   Base = declarative_base()
+2026-04-18T20:12:44: INFO:     Started server process [27056]
+2026-04-18T20:12:44: INFO:     Waiting for application startup.
+2026-04-18T20:12:44: INFO:     Application startup complete.
+2026-04-18T20:12:44: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:44: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:44: INFO:     Application shutdown complete.
+2026-04-18T20:12:46: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:46:   Base = declarative_base()
+2026-04-18T20:12:46: INFO:     Started server process [28792]
+2026-04-18T20:12:46: INFO:     Waiting for application startup.
+2026-04-18T20:12:46: INFO:     Application startup complete.
+2026-04-18T20:12:46: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:46: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:46: INFO:     Application shutdown complete.
+2026-04-18T20:12:47: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:47:   Base = declarative_base()
+2026-04-18T20:12:47: INFO:     Started server process [23740]
+2026-04-18T20:12:47: INFO:     Waiting for application startup.
+2026-04-18T20:12:47: INFO:     Application startup complete.
+2026-04-18T20:12:47: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:47: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:47: INFO:     Application shutdown complete.
+2026-04-18T20:12:49: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:49:   Base = declarative_base()
+2026-04-18T20:12:49: INFO:     Started server process [26324]
+2026-04-18T20:12:49: INFO:     Waiting for application startup.
+2026-04-18T20:12:49: INFO:     Application startup complete.
+2026-04-18T20:12:49: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:49: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:49: INFO:     Application shutdown complete.
+2026-04-18T20:12:51: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:51:   Base = declarative_base()
+2026-04-18T20:12:51: INFO:     Started server process [21256]
+2026-04-18T20:12:51: INFO:     Waiting for application startup.
+2026-04-18T20:12:51: INFO:     Application startup complete.
+2026-04-18T20:12:51: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:51: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:51: INFO:     Application shutdown complete.
+2026-04-18T20:12:53: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:53:   Base = declarative_base()
+2026-04-18T20:12:53: INFO:     Started server process [28164]
+2026-04-18T20:12:53: INFO:     Waiting for application startup.
+2026-04-18T20:12:53: INFO:     Application startup complete.
+2026-04-18T20:12:53: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:53: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:53: INFO:     Application shutdown complete.
+2026-04-18T20:12:54: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:54:   Base = declarative_base()
+2026-04-18T20:12:54: INFO:     Started server process [20508]
+2026-04-18T20:12:54: INFO:     Waiting for application startup.
+2026-04-18T20:12:54: INFO:     Application startup complete.
+2026-04-18T20:12:54: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:54: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:54: INFO:     Application shutdown complete.
+2026-04-18T20:12:56: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:56:   Base = declarative_base()
+2026-04-18T20:12:56: INFO:     Started server process [10316]
+2026-04-18T20:12:56: INFO:     Waiting for application startup.
+2026-04-18T20:12:56: INFO:     Application startup complete.
+2026-04-18T20:12:56: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:56: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:56: INFO:     Application shutdown complete.
+2026-04-18T20:12:58: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:12:58:   Base = declarative_base()
+2026-04-18T20:12:58: INFO:     Started server process [1920]
+2026-04-18T20:12:58: INFO:     Waiting for application startup.
+2026-04-18T20:12:58: INFO:     Application startup complete.
+2026-04-18T20:12:58: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:12:58: INFO:     Waiting for application shutdown.
+2026-04-18T20:12:58: INFO:     Application shutdown complete.
+2026-04-18T20:13:00: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:00:   Base = declarative_base()
+2026-04-18T20:13:00: INFO:     Started server process [25144]
+2026-04-18T20:13:00: INFO:     Waiting for application startup.
+2026-04-18T20:13:00: INFO:     Application startup complete.
+2026-04-18T20:13:00: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:00: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:00: INFO:     Application shutdown complete.
+2026-04-18T20:13:02: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:02:   Base = declarative_base()
+2026-04-18T20:13:02: INFO:     Started server process [27284]
+2026-04-18T20:13:02: INFO:     Waiting for application startup.
+2026-04-18T20:13:02: INFO:     Application startup complete.
+2026-04-18T20:13:02: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:02: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:02: INFO:     Application shutdown complete.
+2026-04-18T20:13:03: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:03:   Base = declarative_base()
+2026-04-18T20:13:03: INFO:     Started server process [15540]
+2026-04-18T20:13:03: INFO:     Waiting for application startup.
+2026-04-18T20:13:03: INFO:     Application startup complete.
+2026-04-18T20:13:03: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:03: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:03: INFO:     Application shutdown complete.
+2026-04-18T20:13:05: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:05:   Base = declarative_base()
+2026-04-18T20:13:05: INFO:     Started server process [8700]
+2026-04-18T20:13:05: INFO:     Waiting for application startup.
+2026-04-18T20:13:05: INFO:     Application startup complete.
+2026-04-18T20:13:05: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:05: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:05: INFO:     Application shutdown complete.
+2026-04-18T20:13:07: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:07:   Base = declarative_base()
+2026-04-18T20:13:07: INFO:     Started server process [28544]
+2026-04-18T20:13:07: INFO:     Waiting for application startup.
+2026-04-18T20:13:07: INFO:     Application startup complete.
+2026-04-18T20:13:07: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:07: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:07: INFO:     Application shutdown complete.
+2026-04-18T20:13:09: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:09:   Base = declarative_base()
+2026-04-18T20:13:09: INFO:     Started server process [29316]
+2026-04-18T20:13:09: INFO:     Waiting for application startup.
+2026-04-18T20:13:09: INFO:     Application startup complete.
+2026-04-18T20:13:09: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:09: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:09: INFO:     Application shutdown complete.
+2026-04-18T20:13:13: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:13:   Base = declarative_base()
+2026-04-18T20:13:13: INFO:     Started server process [13580]
+2026-04-18T20:13:13: INFO:     Waiting for application startup.
+2026-04-18T20:13:13: INFO:     Application startup complete.
+2026-04-18T20:13:13: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:13: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:13: INFO:     Application shutdown complete.
+2026-04-18T20:13:15: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:15:   Base = declarative_base()
+2026-04-18T20:13:15: INFO:     Started server process [28132]
+2026-04-18T20:13:15: INFO:     Waiting for application startup.
+2026-04-18T20:13:15: INFO:     Application startup complete.
+2026-04-18T20:13:15: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:15: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:15: INFO:     Application shutdown complete.
+2026-04-18T20:13:17: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:17:   Base = declarative_base()
+2026-04-18T20:13:17: INFO:     Started server process [26484]
+2026-04-18T20:13:17: INFO:     Waiting for application startup.
+2026-04-18T20:13:17: INFO:     Application startup complete.
+2026-04-18T20:13:17: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:17: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:17: INFO:     Application shutdown complete.
+2026-04-18T20:13:19: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:19:   Base = declarative_base()
+2026-04-18T20:13:19: INFO:     Started server process [25888]
+2026-04-18T20:13:19: INFO:     Waiting for application startup.
+2026-04-18T20:13:19: INFO:     Application startup complete.
+2026-04-18T20:13:19: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:19: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:19: INFO:     Application shutdown complete.
+2026-04-18T20:13:21: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:21:   Base = declarative_base()
+2026-04-18T20:13:21: INFO:     Started server process [23760]
+2026-04-18T20:13:21: INFO:     Waiting for application startup.
+2026-04-18T20:13:21: INFO:     Application startup complete.
+2026-04-18T20:13:21: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:21: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:21: INFO:     Application shutdown complete.
+2026-04-18T20:13:23: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:23:   Base = declarative_base()
+2026-04-18T20:13:23: INFO:     Started server process [4412]
+2026-04-18T20:13:23: INFO:     Waiting for application startup.
+2026-04-18T20:13:23: INFO:     Application startup complete.
+2026-04-18T20:13:23: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:23: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:23: INFO:     Application shutdown complete.
+2026-04-18T20:13:24: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:24:   Base = declarative_base()
+2026-04-18T20:13:24: INFO:     Started server process [23620]
+2026-04-18T20:13:24: INFO:     Waiting for application startup.
+2026-04-18T20:13:24: INFO:     Application startup complete.
+2026-04-18T20:13:24: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:24: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:24: INFO:     Application shutdown complete.
+2026-04-18T20:13:26: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:26:   Base = declarative_base()
+2026-04-18T20:13:26: INFO:     Started server process [19364]
+2026-04-18T20:13:26: INFO:     Waiting for application startup.
+2026-04-18T20:13:26: INFO:     Application startup complete.
+2026-04-18T20:13:26: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:26: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:26: INFO:     Application shutdown complete.
+2026-04-18T20:13:28: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:28:   Base = declarative_base()
+2026-04-18T20:13:28: INFO:     Started server process [17832]
+2026-04-18T20:13:28: INFO:     Waiting for application startup.
+2026-04-18T20:13:28: INFO:     Application startup complete.
+2026-04-18T20:13:28: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:28: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:28: INFO:     Application shutdown complete.
+2026-04-18T20:13:30: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:30:   Base = declarative_base()
+2026-04-18T20:13:30: INFO:     Started server process [26320]
+2026-04-18T20:13:30: INFO:     Waiting for application startup.
+2026-04-18T20:13:30: INFO:     Application startup complete.
+2026-04-18T20:13:30: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:30: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:30: INFO:     Application shutdown complete.
+2026-04-18T20:13:31: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:31:   Base = declarative_base()
+2026-04-18T20:13:31: INFO:     Started server process [24056]
+2026-04-18T20:13:31: INFO:     Waiting for application startup.
+2026-04-18T20:13:31: INFO:     Application startup complete.
+2026-04-18T20:13:31: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:31: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:31: INFO:     Application shutdown complete.
+2026-04-18T20:13:33: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:33:   Base = declarative_base()
+2026-04-18T20:13:33: INFO:     Started server process [5832]
+2026-04-18T20:13:33: INFO:     Waiting for application startup.
+2026-04-18T20:13:33: INFO:     Application startup complete.
+2026-04-18T20:13:33: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:33: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:33: INFO:     Application shutdown complete.
+2026-04-18T20:13:35: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:35:   Base = declarative_base()
+2026-04-18T20:13:35: INFO:     Started server process [25640]
+2026-04-18T20:13:35: INFO:     Waiting for application startup.
+2026-04-18T20:13:35: INFO:     Application startup complete.
+2026-04-18T20:13:35: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:35: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:35: INFO:     Application shutdown complete.
+2026-04-18T20:13:36: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:36:   Base = declarative_base()
+2026-04-18T20:13:37: INFO:     Started server process [2872]
+2026-04-18T20:13:37: INFO:     Waiting for application startup.
+2026-04-18T20:13:37: INFO:     Application startup complete.
+2026-04-18T20:13:37: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:37: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:37: INFO:     Application shutdown complete.
+2026-04-18T20:13:38: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:38:   Base = declarative_base()
+2026-04-18T20:13:38: INFO:     Started server process [26576]
+2026-04-18T20:13:38: INFO:     Waiting for application startup.
+2026-04-18T20:13:38: INFO:     Application startup complete.
+2026-04-18T20:13:38: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:38: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:38: INFO:     Application shutdown complete.
+2026-04-18T20:13:40: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:40:   Base = declarative_base()
+2026-04-18T20:13:40: INFO:     Started server process [23640]
+2026-04-18T20:13:40: INFO:     Waiting for application startup.
+2026-04-18T20:13:40: INFO:     Application startup complete.
+2026-04-18T20:13:40: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:40: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:40: INFO:     Application shutdown complete.
+2026-04-18T20:13:42: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:42:   Base = declarative_base()
+2026-04-18T20:13:42: INFO:     Started server process [20256]
+2026-04-18T20:13:42: INFO:     Waiting for application startup.
+2026-04-18T20:13:42: INFO:     Application startup complete.
+2026-04-18T20:13:42: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:42: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:42: INFO:     Application shutdown complete.
+2026-04-18T20:13:44: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:44:   Base = declarative_base()
+2026-04-18T20:13:44: INFO:     Started server process [24920]
+2026-04-18T20:13:44: INFO:     Waiting for application startup.
+2026-04-18T20:13:44: INFO:     Application startup complete.
+2026-04-18T20:13:44: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:44: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:44: INFO:     Application shutdown complete.
+2026-04-18T20:13:45: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:45:   Base = declarative_base()
+2026-04-18T20:13:46: INFO:     Started server process [29368]
+2026-04-18T20:13:46: INFO:     Waiting for application startup.
+2026-04-18T20:13:46: INFO:     Application startup complete.
+2026-04-18T20:13:46: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:46: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:46: INFO:     Application shutdown complete.
+2026-04-18T20:13:47: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:47:   Base = declarative_base()
+2026-04-18T20:13:47: INFO:     Started server process [26772]
+2026-04-18T20:13:47: INFO:     Waiting for application startup.
+2026-04-18T20:13:47: INFO:     Application startup complete.
+2026-04-18T20:13:47: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:47: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:47: INFO:     Application shutdown complete.
+2026-04-18T20:13:49: C:\Users\OK\Desktop\Competition\FairGig-Hackathon\fairgig-python\main.py:48: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+2026-04-18T20:13:49:   Base = declarative_base()
+2026-04-18T20:13:49: INFO:     Started server process [26052]
+2026-04-18T20:13:49: INFO:     Waiting for application startup.
+2026-04-18T20:13:49: INFO:     Application startup complete.
+2026-04-18T20:13:49: ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+2026-04-18T20:13:49: INFO:     Waiting for application shutdown.
+2026-04-18T20:13:49: INFO:     Application shutdown complete.

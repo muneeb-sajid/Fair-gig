@@ -1,0 +1,42 @@
+2026-04-18T17:48:57: ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-04-18T17:48:57: 🚀 Grievance Service running on http://localhost:3001
+2026-04-18T17:48:57: 📋 Endpoints:
+2026-04-18T17:48:57:    POST   /api/grievances           - Create complaint
+2026-04-18T17:48:57:    GET    /api/grievances           - List complaints (with filters)
+2026-04-18T17:48:57:    GET    /api/grievances/:id       - Get complaint by ID
+2026-04-18T17:48:57:    PUT    /api/grievances/:id       - Update complaint
+2026-04-18T17:48:57:    DELETE /api/grievances/:id       - Delete complaint
+2026-04-18T17:48:57:    POST   /api/grievances/cluster   - Cluster complaints
+2026-04-18T17:48:57:    PUT    /api/grievances/:id/escalate - Escalate complaint
+2026-04-18T17:48:57:    POST   /api/grievances/bulk-escalate - Bulk escalate
+2026-04-18T17:48:57:    GET    /api/analytics/complaints - Analytics
+2026-04-18T17:48:57:    GET    /api/health               - Health check
+2026-04-18T17:48:57: ✅ MongoDB Connected for Grievance Service
+2026-04-18T17:51:29: ◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+2026-04-18T17:51:31: 🚀 Grievance Service running on http://localhost:3001
+2026-04-18T17:51:31: 📋 Endpoints:
+2026-04-18T17:51:31:    POST   /api/grievances           - Create complaint
+2026-04-18T17:51:31:    GET    /api/grievances           - List complaints (with filters)
+2026-04-18T17:51:31:    GET    /api/grievances/:id       - Get complaint by ID
+2026-04-18T17:51:31:    PUT    /api/grievances/:id       - Update complaint
+2026-04-18T17:51:31:    DELETE /api/grievances/:id       - Delete complaint
+2026-04-18T17:51:31:    POST   /api/grievances/cluster   - Cluster complaints
+2026-04-18T17:51:31:    PUT    /api/grievances/:id/escalate - Escalate complaint
+2026-04-18T17:51:31:    POST   /api/grievances/bulk-escalate - Bulk escalate
+2026-04-18T17:51:31:    GET    /api/analytics/complaints - Analytics
+2026-04-18T17:51:31:    GET    /api/health               - Health check
+2026-04-18T17:51:31: ✅ MongoDB Connected for Grievance Service
+2026-04-18T20:12:34: ◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+2026-04-18T20:12:34: 🚀 Grievance Service running on http://localhost:3001
+2026-04-18T20:12:34: 📋 Endpoints:
+2026-04-18T20:12:34:    POST   /api/grievances           - Create complaint
+2026-04-18T20:12:34:    GET    /api/grievances           - List complaints (with filters)
+2026-04-18T20:12:34:    GET    /api/grievances/:id       - Get complaint by ID
+2026-04-18T20:12:34:    PUT    /api/grievances/:id       - Update complaint
+2026-04-18T20:12:34:    DELETE /api/grievances/:id       - Delete complaint
+2026-04-18T20:12:34:    POST   /api/grievances/cluster   - Cluster complaints
+2026-04-18T20:12:34:    PUT    /api/grievances/:id/escalate - Escalate complaint
+2026-04-18T20:12:34:    POST   /api/grievances/bulk-escalate - Bulk escalate
+2026-04-18T20:12:34:    GET    /api/analytics/complaints - Analytics
+2026-04-18T20:12:34:    GET    /api/health               - Health check
+2026-04-18T20:12:34: ✅ MongoDB Connected for Grievance Service
