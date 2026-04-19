@@ -3,3 +3,6 @@
 "certificate-service/.env" 
 ".env" 
 "*.env" 
+"fairgig-node/.env" 
+"fairgig-python/.env" 
+"certificate-service/.env" 
