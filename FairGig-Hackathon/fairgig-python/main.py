@@ -1,30 +1,29 @@
-# main.py - Auth & Earnings Service (Port 8000)
-# WITH FULL ROLE-BASED ACCESS CONTROL
+# main.py - Auth & Earnings Service with MongoDB
+# PRODUCTION READY - Using MongoDB Atlas
 
 from fastapi import FastAPI, HTTPException, status, Depends, Header, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Boolean
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 import os
 import shutil
-from pathlib import Path
 from dotenv import load_dotenv
+from motor.motor_asyncio import AsyncIOMotorClient
+from bson import ObjectId
 import csv
 import io
-
 
 load_dotenv()
 
 app = FastAPI(title="FairGig Auth & Earnings Service")
 
-# CORS for Tayyab's frontend
+# ==========================================
+# CORS CONFIGURATION
+# ==========================================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:3001"],
@@ -40,53 +39,18 @@ UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # ==========================================
-# DATABASE SETUP (SQLite)
+# MONGODB CONNECTION
 # ==========================================
-# Direct PostgreSQL connection (hardcoded for testing)
-# DATABASE SETUP (PostgreSQL)
-DATABASE_URL = "postgresql://fairgig_user:AqIesu4vDIc7N9pr9aUrqHzk7n2XP8QW@dpg-d7i49s1f9bms73furuv0-a/fairgig"
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://muneebsajid1247_db_user:Angry_Birds.234@cluster0.gmpxyxy.mongodb.net/fairgig?retryWrites=true&w=majority")
+DB_NAME = os.getenv("DB_NAME", "fairgig_auth")
 
-# ==========================================
-# DATABASE MODELS
-# ==========================================
-class Worker(Base):
-    __tablename__ = "workers"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    password = Column(String, nullable=False)
-    phone = Column(String, nullable=False)
-    city = Column(String, default="Lahore")
-    platform = Column(String, nullable=False)
-    role = Column(String, default="worker")  # worker, advocate, admin
-    total_earnings = Column(Float, default=0)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+# Create MongoDB client
+client = AsyncIOMotorClient(MONGODB_URI)
+db = client[DB_NAME]
 
-class Earning(Base):
-    __tablename__ = "earnings"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    worker_id = Column(Integer, index=True, nullable=False)
-    amount = Column(Float, nullable=False)
-    platform = Column(String, nullable=False)
-    date = Column(String, nullable=False)
-    hours = Column(Float, nullable=True)
-    gross = Column(Float, nullable=True)
-    deductions = Column(Float, nullable=True)
-    screenshot = Column(String, nullable=True)
-    verified = Column(String, default="pending")  # pending, approved, flagged
-    verified_by = Column(String, nullable=True)
-    verified_at = Column(DateTime, nullable=True)
-    flag_reason = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-
-# Create tables
-Base.metadata.create_all(bind=engine)
+# Collections
+workers_collection = db.workers
+earnings_collection = db.earnings
 
 # ==========================================
 # PASSWORD & JWT SETUP
@@ -108,18 +72,22 @@ def create_token(data: dict):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# ==========================================
-# DEPENDENCIES
-# ==========================================
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+def serialize_worker(worker):
+    """Convert MongoDB worker document to JSON serializable format"""
+    if worker:
+        worker["_id"] = str(worker["_id"])
+    return worker
 
-def get_current_worker(authorization: str = Header(None), db: Session = Depends(get_db)):
-    """Extract worker_id from JWT token"""
+def serialize_earning(earning):
+    """Convert MongoDB earning document to JSON serializable format"""
+    if earning:
+        earning["_id"] = str(earning["_id"])
+    return earning
+
+# ==========================================
+# JWT MIDDLEWARE
+# ==========================================
+async def get_current_worker(authorization: str = Header(None)):
     if not authorization:
         raise HTTPException(status_code=401, detail="No authorization header")
     
@@ -135,11 +103,12 @@ def get_current_worker(authorization: str = Header(None), db: Session = Depends(
         if not worker_id:
             raise HTTPException(status_code=401, detail="Invalid token payload")
         
-        worker = db.query(Worker).filter(Worker.id == worker_id).first()
+        from bson import ObjectId
+        worker = await workers_collection.find_one({"_id": ObjectId(worker_id)})
         if not worker:
             raise HTTPException(status_code=401, detail="Worker not found")
         
-        if not worker.is_active:
+        if not worker.get("is_active", True):
             raise HTTPException(status_code=401, detail="Account is deactivated")
         
         return worker
@@ -150,14 +119,13 @@ def get_current_worker(authorization: str = Header(None), db: Session = Depends(
 # ROLE-BASED ACCESS CONTROL
 # ==========================================
 def require_role(allowed_roles: List[str]):
-    """Middleware to check if user has required role"""
-    def role_checker(current_worker: Worker = Depends(get_current_worker)):
-        if current_worker.role not in allowed_roles:
+    async def role_checker(current_worker: dict = Depends(get_current_worker)):
+        if current_worker.get("role") not in allowed_roles:
             raise HTTPException(
                 status_code=403, 
-                detail=f"Access denied. Required role: {', '.join(allowed_roles)}. Your role: {current_worker.role}"
+                detail=f"Access denied. Required role: {', '.join(allowed_roles)}. Your role: {current_worker.get('role')}"
             )
-        return current_worker.id
+        return current_worker["_id"]
     return role_checker
 
 # ==========================================
@@ -188,7 +156,7 @@ class VerificationAction(BaseModel):
     flag_reason: Optional[str] = None
 
 class RoleUpdate(BaseModel):
-    role: str  # worker, advocate, admin
+    role: str
 
 class EarningsUpdate(BaseModel):
     amount: Optional[float] = None
@@ -198,140 +166,268 @@ class EarningsUpdate(BaseModel):
     gross: Optional[float] = None
     deductions: Optional[float] = None
 
-
 # ==========================================
-# PUBLIC API ENDPOINTS (No Auth Required)
+# PUBLIC API ENDPOINTS
 # ==========================================
 
 @app.get("/api/health")
 async def health():
-    return {"status": "OK", "service": "Auth & Earnings", "port": 8000}
+    return {"status": "OK", "service": "Auth & Earnings", "port": 8000, "database": "MongoDB"}
 
 @app.post("/api/auth/register", status_code=status.HTTP_201_CREATED)
-async def register(worker: WorkerRegister, db: Session = Depends(get_db)):
-    existing = db.query(Worker).filter(Worker.email == worker.email).first()
+async def register(worker: WorkerRegister):
+    # Check if email already exists
+    existing = await workers_collection.find_one({"email": worker.email})
     if existing:
         raise HTTPException(400, "Email already registered")
     
-    new_worker = Worker(
-        name=worker.name,
-        email=worker.email,
-        password=hash_password(worker.password),
-        phone=worker.phone,
-        city=worker.city,
-        platform=worker.platform,
-        role="worker"  # Default role
-    )
-    db.add(new_worker)
-    db.commit()
-    db.refresh(new_worker)
+    new_worker = {
+        "name": worker.name,
+        "email": worker.email,
+        "password": hash_password(worker.password),
+        "phone": worker.phone,
+        "city": worker.city,
+        "platform": worker.platform,
+        "role": "worker",
+        "total_earnings": 0,
+        "is_active": True,
+        "created_at": datetime.utcnow()
+    }
     
-    token = create_token({"sub": worker.email, "worker_id": new_worker.id})
+    result = await workers_collection.insert_one(new_worker)
+    
+    token = create_token({"sub": worker.email, "worker_id": str(result.inserted_id)})
     
     return {
         "success": True,
         "message": "Worker registered",
-        "worker_id": new_worker.id,
-        "role": new_worker.role,
+        "worker_id": str(result.inserted_id),
+        "role": "worker",
         "token": token
     }
 
 @app.post("/api/auth/login")
-async def login(login: WorkerLogin, db: Session = Depends(get_db)):
-    worker = db.query(Worker).filter(Worker.email == login.email).first()
-    if not worker or not verify_password(login.password, worker.password):
+async def login(login: WorkerLogin):
+    worker = await workers_collection.find_one({"email": login.email})
+    if not worker or not verify_password(login.password, worker["password"]):
         raise HTTPException(401, "Invalid credentials")
     
-    if not worker.is_active:
+    if not worker.get("is_active", True):
         raise HTTPException(401, "Account is deactivated")
     
-    token = create_token({"sub": worker.email, "worker_id": worker.id})
+    token = create_token({"sub": worker["email"], "worker_id": str(worker["_id"])})
     
     return {
         "success": True,
         "token": token,
-        "worker_id": worker.id,
-        "name": worker.name,
-        "role": worker.role
+        "worker_id": str(worker["_id"]),
+        "name": worker["name"],
+        "role": worker.get("role", "worker")
     }
-@app.put("/api/earnings/{earning_id}")
-async def update_earning(
-    earning_id: int,
-    update_data: EarningsUpdate,
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    """Update an existing earning record (Worker can update their own, Advocate/Admin can update any)"""
-    
-    # Find the earning
-    earning = db.query(Earning).filter(Earning.id == earning_id).first()
-    if not earning:
-        raise HTTPException(404, "Earning not found")
-    
-    # Check permission
-    if current_worker.role == "worker" and earning.worker_id != current_worker.id:
-        raise HTTPException(403, "You can only update your own earnings")
-    
-    # Calculate old amount for total_earnings adjustment
-    old_amount = earning.amount
-    
-    # Update fields if provided
-    if update_data.amount is not None:
-        earning.amount = update_data.amount
-    if update_data.platform is not None:
-        earning.platform = update_data.platform
-    if update_data.date is not None:
-        earning.date = update_data.date
-    if update_data.hours is not None:
-        earning.hours = update_data.hours
-    if update_data.gross is not None:
-        earning.gross = update_data.gross
-    if update_data.deductions is not None:
-        earning.deductions = update_data.deductions
-    
-    # Reset verification status if amount changed
-    if update_data.amount is not None and update_data.amount != old_amount:
-        earning.verified = "pending"
-        earning.verified_by = None
-        earning.verified_at = None
-    
-    # Update worker's total earnings
-    worker = db.query(Worker).filter(Worker.id == earning.worker_id).first()
-    if worker and update_data.amount is not None:
-        worker.total_earnings = worker.total_earnings - old_amount + update_data.amount
-    
-    db.commit()
-    db.refresh(earning)
-    
+
+@app.get("/api/auth/profile")
+async def get_profile(current_worker: dict = Depends(get_current_worker)):
     return {
         "success": True,
-        "message": "Earning updated successfully",
-        "earning": {
-            "id": earning.id,
-            "amount": earning.amount,
-            "platform": earning.platform,
-            "date": earning.date,
-            "hours": earning.hours,
-            "gross": earning.gross,
-            "deductions": earning.deductions,
-            "verified": earning.verified
+        "worker": {
+            "id": str(current_worker["_id"]),
+            "name": current_worker["name"],
+            "email": current_worker["email"],
+            "phone": current_worker["phone"],
+            "city": current_worker["city"],
+            "platform": current_worker["platform"],
+            "role": current_worker.get("role", "worker"),
+            "total_earnings": current_worker.get("total_earnings", 0),
+            "is_active": current_worker.get("is_active", True),
+            "created_at": current_worker["created_at"]
         }
     }
 
+@app.post("/api/auth/refresh")
+async def refresh_token(current_worker: dict = Depends(get_current_worker)):
+    new_token = create_token({"sub": current_worker["email"], "worker_id": str(current_worker["_id"])})
+    return {
+        "success": True,
+        "token": new_token,
+        "token_type": "bearer"
+    }
+
+# ==========================================
+# EARNINGS ENDPOINTS
+# ==========================================
+
+@app.post("/api/earnings")
+async def add_earnings(
+    amount: float = Form(...),
+    platform: str = Form(...),
+    date: str = Form(...),
+    hours: Optional[float] = Form(None),
+    gross: Optional[float] = Form(None),
+    deductions: Optional[float] = Form(None),
+    screenshot: Optional[UploadFile] = File(None),
+    current_worker: dict = Depends(get_current_worker)
+):
+    if current_worker.get("role") != "worker":
+        raise HTTPException(403, "Only workers can add earnings")
+    
+    screenshot_filename = None
+    if screenshot:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        screenshot_filename = f"worker_{current_worker['_id']}_{timestamp}_{screenshot.filename}"
+        file_path = os.path.join(UPLOAD_DIR, screenshot_filename)
+        
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(screenshot.file, buffer)
+    
+    new_earning = {
+        "worker_id": str(current_worker["_id"]),
+        "amount": amount,
+        "platform": platform,
+        "date": date,
+        "hours": hours,
+        "gross": gross,
+        "deductions": deductions,
+        "screenshot": screenshot_filename,
+        "verified": "pending",
+        "verified_by": None,
+        "verified_at": None,
+        "flag_reason": None,
+        "created_at": datetime.utcnow()
+    }
+    
+    result = await earnings_collection.insert_one(new_earning)
+    
+    # Update worker's total earnings
+    await workers_collection.update_one(
+        {"_id": current_worker["_id"]},
+        {"$inc": {"total_earnings": amount}}
+    )
+    
+    return {
+        "success": True, 
+        "message": "Earnings added successfully",
+        "earning_id": str(result.inserted_id),
+        "screenshot": screenshot_filename,
+        "verified": "pending"
+    }
+
+@app.get("/api/earnings/me")
+async def get_my_earnings(current_worker: dict = Depends(get_current_worker)):
+    earnings_cursor = earnings_collection.find({"worker_id": str(current_worker["_id"])}).sort("date", -1)
+    earnings = await earnings_cursor.to_list(length=100)
+    
+    return {
+        "success": True,
+        "count": len(earnings),
+        "earnings": [
+            {
+                "id": str(e["_id"]),
+                "amount": e["amount"],
+                "platform": e["platform"],
+                "date": e["date"],
+                "hours": e.get("hours"),
+                "gross": e.get("gross"),
+                "deductions": e.get("deductions"),
+                "screenshot": e.get("screenshot"),
+                "verified": e["verified"]
+            }
+            for e in earnings
+        ]
+    }
+
+@app.put("/api/earnings/{earning_id}")
+async def update_earning(
+    earning_id: str,
+    update_data: EarningsUpdate,
+    current_worker: dict = Depends(get_current_worker)
+):
+    from bson import ObjectId
+    earning = await earnings_collection.find_one({"_id": ObjectId(earning_id)})
+    if not earning:
+        raise HTTPException(404, "Earning not found")
+    
+    if current_worker.get("role") == "worker" and earning["worker_id"] != str(current_worker["_id"]):
+        raise HTTPException(403, "You can only update your own earnings")
+    
+    old_amount = earning["amount"]
+    
+    update_dict = {}
+    if update_data.amount is not None:
+        update_dict["amount"] = update_data.amount
+        update_dict["verified"] = "pending"
+        update_dict["verified_by"] = None
+        update_dict["verified_at"] = None
+    if update_data.platform is not None:
+        update_dict["platform"] = update_data.platform
+    if update_data.date is not None:
+        update_dict["date"] = update_data.date
+    if update_data.hours is not None:
+        update_dict["hours"] = update_data.hours
+    if update_data.gross is not None:
+        update_dict["gross"] = update_data.gross
+    if update_data.deductions is not None:
+        update_dict["deductions"] = update_data.deductions
+    
+    if update_dict:
+        await earnings_collection.update_one(
+            {"_id": ObjectId(earning_id)},
+            {"$set": update_dict}
+        )
+        
+        # Update worker's total earnings if amount changed
+        if update_data.amount is not None:
+            await workers_collection.update_one(
+                {"_id": ObjectId(earning["worker_id"])},
+                {"$inc": {"total_earnings": update_data.amount - old_amount}}
+            )
+    
+    return {
+        "success": True,
+        "message": "Earning updated successfully"
+    }
+
+@app.delete("/api/earnings/{earning_id}")
+async def delete_earning(
+    earning_id: str,
+    current_worker: dict = Depends(get_current_worker)
+):
+    from bson import ObjectId
+    earning = await earnings_collection.find_one({"_id": ObjectId(earning_id)})
+    if not earning:
+        raise HTTPException(404, "Earning not found")
+    
+    if current_worker.get("role") == "worker" and earning["worker_id"] != str(current_worker["_id"]):
+        raise HTTPException(403, "You can only delete your own earnings")
+    
+    # Update worker's total earnings
+    await workers_collection.update_one(
+        {"_id": ObjectId(earning["worker_id"])},
+        {"$inc": {"total_earnings": -earning["amount"]}}
+    )
+    
+    await earnings_collection.delete_one({"_id": ObjectId(earning_id)})
+    
+    return {
+        "success": True,
+        "message": "Earning deleted successfully"
+    }
+
 @app.get("/api/earnings/city-median")
-async def get_city_median(city: str = "Lahore", db: Session = Depends(get_db)):
-    workers = db.query(Worker).filter(Worker.city == city, Worker.role == "worker").all()
-    worker_ids = [w.id for w in workers]
+async def get_city_median(city: str = "Lahore"):
+    workers_cursor = workers_collection.find({"city": city, "role": "worker"})
+    workers = await workers_cursor.to_list(length=1000)
+    worker_ids = [str(w["_id"]) for w in workers]
     
     if not worker_ids:
         return {"success": True, "city": city, "median": 0, "message": "No workers found"}
     
-    earnings = db.query(Earning).filter(Earning.worker_id.in_(worker_ids)).all()
+    earnings_cursor = earnings_collection.find({"worker_id": {"$in": worker_ids}})
+    earnings = await earnings_cursor.to_list(length=10000)
     
     if not earnings:
         return {"success": True, "city": city, "median": 0, "message": "No earnings data"}
     
-    amounts = sorted([e.amount for e in earnings])
+    amounts = sorted([e["amount"] for e in earnings])
     mid = len(amounts) // 2
     
     if len(amounts) % 2 == 0:
@@ -346,390 +442,37 @@ async def get_city_median(city: str = "Lahore", db: Session = Depends(get_db)):
         "total_workers": len(workers),
         "total_earnings": len(earnings)
     }
-# ==========================================
-# DELETE EARNINGS ENDPOINT
-# ==========================================
-
-@app.delete("/api/earnings/{earning_id}")
-async def delete_earning(
-    earning_id: int,
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    """Delete an earning record (Worker can delete their own, Advocate/Admin can delete any)"""
-    
-    # Find the earning
-    earning = db.query(Earning).filter(Earning.id == earning_id).first()
-    if not earning:
-        raise HTTPException(404, "Earning not found")
-    
-    # Check permission
-    if current_worker.role == "worker" and earning.worker_id != current_worker.id:
-        raise HTTPException(403, "You can only delete your own earnings")
-    
-    # Update worker's total earnings
-    worker = db.query(Worker).filter(Worker.id == earning.worker_id).first()
-    if worker:
-        worker.total_earnings -= earning.amount
-    
-    # Delete the earning
-    db.delete(earning)
-    db.commit()
-    
-    return {
-        "success": True,
-        "message": "Earning deleted successfully",
-        "earning_id": earning_id
-    }
-    # ==========================================
-# PLATFORM COMMISSION TRACKER
-# ==========================================
-
-@app.get("/api/analytics/platform-commissions")
-async def get_platform_commissions(
-    platform: Optional[str] = None,
-    start_date: Optional[str] = None,
-    end_date: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Track platform commission rates over time"""
-    
-    query = db.query(Earning).filter(Earning.gross.isnot(None), Earning.deductions.isnot(None))
-    
-    if platform:
-        query = query.filter(Earning.platform == platform)
-    if start_date:
-        query = query.filter(Earning.date >= start_date)
-    if end_date:
-        query = query.filter(Earning.date <= end_date)
-    
-    earnings = query.all()
-    
-    # Calculate commission percentage for each earning
-    commission_data = []
-    platform_stats = {}
-    
-    for earning in earnings:
-        if earning.gross > 0:
-            commission_percent = (earning.deductions / earning.gross) * 100
-        else:
-            commission_percent = 0
-        
-        commission_data.append({
-            "platform": earning.platform,
-            "date": earning.date,
-            "commission_percent": round(commission_percent, 2),
-            "gross": earning.gross,
-            "deductions": earning.deductions
-        })
-        
-        # Aggregate by platform
-        if earning.platform not in platform_stats:
-            platform_stats[earning.platform] = {
-                "total_commissions": 0,
-                "total_gross": 0,
-                "count": 0
-            }
-        platform_stats[earning.platform]["total_commissions"] += earning.deductions
-        platform_stats[earning.platform]["total_gross"] += earning.gross
-        platform_stats[earning.platform]["count"] += 1
-    
-    # Calculate average commission per platform
-    platform_averages = {}
-    for plat, stats in platform_stats.items():
-        if stats["total_gross"] > 0:
-            platform_averages[plat] = round((stats["total_commissions"] / stats["total_gross"]) * 100, 2)
-        else:
-            platform_averages[plat] = 0
-    
-    return {
-        "success": True,
-        "platform_averages": platform_averages,
-        "trend_data": commission_data[-50:],  # Last 50 records for trend
-        "total_records": len(commission_data)
-    }
-    # ==========================================
-# WEEKLY/MONTHLY EARNINGS TRENDS
-# ==========================================
-
-from calendar import monthrange
-
-@app.get("/api/analytics/earnings-trends")
-async def get_earnings_trends(
-    period: str = "weekly",  # weekly, monthly
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    """Get worker's earnings trends by week or month"""
-    
-    earnings = db.query(Earning).filter(Earning.worker_id == current_worker.id).all()
-    
-    if period == "weekly":
-        # Group by week
-        trends = {}
-        for earning in earnings:
-            # Parse date
-            earning_date = datetime.strptime(earning.date, "%Y-%m-%d")
-            # Get week number and year
-            week_key = f"{earning_date.year}-W{earning_date.isocalendar()[1]}"
-            
-            if week_key not in trends:
-                trends[week_key] = {
-                    "week": week_key,
-                    "total_earnings": 0,
-                    "total_hours": 0,
-                    "count": 0
-                }
-            trends[week_key]["total_earnings"] += earning.amount
-            trends[week_key]["total_hours"] += earning.hours or 0
-            trends[week_key]["count"] += 1
-        
-        # Calculate hourly rates
-        for week in trends.values():
-            if week["total_hours"] > 0:
-                week["hourly_rate"] = round(week["total_earnings"] / week["total_hours"], 2)
-            else:
-                week["hourly_rate"] = 0
-        
-        return {
-            "success": True,
-            "period": "weekly",
-            "trends": list(trends.values())
-        }
-    
-    elif period == "monthly":
-        # Group by month
-        trends = {}
-        for earning in earnings:
-            # Parse date
-            earning_date = datetime.strptime(earning.date, "%Y-%m-%d")
-            month_key = f"{earning_date.year}-{earning_date.month:02d}"
-            
-            if month_key not in trends:
-                trends[month_key] = {
-                    "month": month_key,
-                    "total_earnings": 0,
-                    "total_hours": 0,
-                    "count": 0
-                }
-            trends[month_key]["total_earnings"] += earning.amount
-            trends[month_key]["total_hours"] += earning.hours or 0
-            trends[month_key]["count"] += 1
-        
-        # Calculate hourly rates
-        for month in trends.values():
-            if month["total_hours"] > 0:
-                month["hourly_rate"] = round(month["total_earnings"] / month["total_hours"], 2)
-            else:
-                month["hourly_rate"] = 0
-        
-        return {
-            "success": True,
-            "period": "monthly",
-            "trends": list(trends.values())
-        }
-    
-    else:
-        raise HTTPException(400, "Period must be 'weekly' or 'monthly'")
-        # ==========================================
-# EFFECTIVE HOURLY RATE TRACKER
-# ==========================================
-
-@app.get("/api/analytics/hourly-rate")
-async def get_hourly_rate_trend(
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    """Track effective hourly rate over time"""
-    
-    earnings = db.query(Earning).filter(
-        Earning.worker_id == current_worker.id,
-        Earning.hours.isnot(None),
-        Earning.hours > 0
-    ).order_by(Earning.date.asc()).all()
-    
-    hourly_rates = []
-    for earning in earnings:
-        hourly_rate = earning.amount / earning.hours
-        hourly_rates.append({
-            "date": earning.date,
-            "hourly_rate": round(hourly_rate, 2),
-            "amount": earning.amount,
-            "hours": earning.hours,
-            "platform": earning.platform
-        })
-    
-    # Calculate average hourly rate
-    if hourly_rates:
-        avg_hourly_rate = sum(h["hourly_rate"] for h in hourly_rates) / len(hourly_rates)
-    else:
-        avg_hourly_rate = 0
-    
-    return {
-        "success": True,
-        "average_hourly_rate": round(avg_hourly_rate, 2),
-        "trend": hourly_rates[-30:],  # Last 30 records
-        "total_shifts": len(hourly_rates)
-    }
-# ==========================================
-# WORKER-ONLY API ENDPOINTS (Role: worker)
-# ==========================================
-
-@app.get("/api/auth/profile")
-async def get_profile(
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    return {
-        "success": True,
-        "worker": {
-            "id": current_worker.id,
-            "name": current_worker.name,
-            "email": current_worker.email,
-            "phone": current_worker.phone,
-            "city": current_worker.city,
-            "platform": current_worker.platform,
-            "role": current_worker.role,
-            "total_earnings": current_worker.total_earnings,
-            "is_active": current_worker.is_active,
-            "created_at": current_worker.created_at
-        }
-    }
-
-@app.post("/api/earnings")
-async def add_earnings(
-    amount: float = Form(...),
-    platform: str = Form(...),
-    date: str = Form(...),
-    hours: Optional[float] = Form(None),
-    gross: Optional[float] = Form(None),
-    deductions: Optional[float] = Form(None),
-    screenshot: Optional[UploadFile] = File(None),
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    # Only workers can add earnings
-    if current_worker.role != "worker":
-        raise HTTPException(403, "Only workers can add earnings")
-    
-    # Save screenshot if uploaded
-    screenshot_filename = None
-    if screenshot:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_filename = f"worker_{current_worker.id}_{timestamp}_{screenshot.filename}"
-        file_path = os.path.join(UPLOAD_DIR, screenshot_filename)
-        
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(screenshot.file, buffer)
-    
-    new_earning = Earning(
-        worker_id=current_worker.id,
-        amount=amount,
-        platform=platform,
-        date=date,
-        hours=hours,
-        gross=gross,
-        deductions=deductions,
-        screenshot=screenshot_filename,
-        verified="pending"
-    )
-    db.add(new_earning)
-    current_worker.total_earnings += amount
-    db.commit()
-    db.refresh(new_earning)
-    
-    return {
-        "success": True, 
-        "message": "Earnings added successfully",
-        "earning_id": new_earning.id,
-        "screenshot": screenshot_filename,
-        "verified": new_earning.verified
-    }
-
-@app.get("/api/earnings/me")
-async def get_my_earnings(
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
-):
-    earnings = db.query(Earning).filter(Earning.worker_id == current_worker.id).order_by(Earning.date.desc()).all()
-    
-    return {
-        "success": True,
-        "count": len(earnings),
-        "earnings": [
-            {
-                "id": e.id,
-                "amount": e.amount,
-                "platform": e.platform,
-                "date": e.date,
-                "hours": e.hours,
-                "gross": e.gross,
-                "deductions": e.deductions,
-                "screenshot": e.screenshot,
-                "verified": e.verified
-            }
-            for e in earnings
-        ]
-    }
 
 # ==========================================
-# ADVOCATE & ADMIN API ENDPOINTS
+# VERIFICATION ENDPOINTS (Advocate/Admin)
 # ==========================================
-
-@app.get("/api/earnings/{user_id}")
-async def get_earnings_by_user(
-    user_id: int, 
-    current_worker_id: int = Depends(require_role(["advocate", "admin"])),
-    db: Session = Depends(get_db)
-):
-    earnings = db.query(Earning).filter(Earning.worker_id == user_id).order_by(Earning.date.desc()).all()
-    
-    return {
-        "success": True,
-        "count": len(earnings),
-        "earnings": [
-            {
-                "id": e.id,
-                "amount": e.amount,
-                "platform": e.platform,
-                "date": e.date,
-                "hours": e.hours,
-                "gross": e.gross,
-                "deductions": e.deductions,
-                "screenshot": e.screenshot,
-                "verified": e.verified
-            }
-            for e in earnings
-        ]
-    }
 
 @app.get("/api/verification/queue")
-async def get_verification_queue(
-    current_worker_id: int = Depends(require_role(["advocate", "admin"])),
-    db: Session = Depends(get_db)
-):
-    pending_earnings = db.query(Earning).filter(Earning.verified == "pending").order_by(Earning.created_at.desc()).all()
+async def get_verification_queue(current_worker_id: str = Depends(require_role(["advocate", "admin"]))):
+    pending_cursor = earnings_collection.find({"verified": "pending"}).sort("created_at", -1)
+    pending_earnings = await pending_cursor.to_list(length=100)
     
     result = []
     for earning in pending_earnings:
-        worker = db.query(Worker).filter(Worker.id == earning.worker_id).first()
+        from bson import ObjectId
+        worker = await workers_collection.find_one({"_id": ObjectId(earning["worker_id"])})
         result.append({
-            "id": earning.id,
+            "id": str(earning["_id"]),
             "worker": {
-                "id": worker.id,
-                "name": worker.name,
-                "email": worker.email,
-                "platform": worker.platform
+                "id": str(worker["_id"]),
+                "name": worker["name"],
+                "email": worker["email"],
+                "platform": worker["platform"]
             },
-            "amount": earning.amount,
-            "platform": earning.platform,
-            "date": earning.date,
-            "hours": earning.hours,
-            "gross": earning.gross,
-            "deductions": earning.deductions,
-            "screenshot": earning.screenshot,
-            "verified": earning.verified,
-            "created_at": earning.created_at
+            "amount": earning["amount"],
+            "platform": earning["platform"],
+            "date": earning["date"],
+            "hours": earning.get("hours"),
+            "gross": earning.get("gross"),
+            "deductions": earning.get("deductions"),
+            "screenshot": earning.get("screenshot"),
+            "verified": earning["verified"],
+            "created_at": earning["created_at"]
         })
     
     return {
@@ -741,7 +484,7 @@ async def get_verification_queue(
 @app.get("/api/screenshot/{filename}")
 async def get_screenshot(
     filename: str,
-    current_worker_id: int = Depends(require_role(["advocate", "admin"]))
+    current_worker_id: str = Depends(require_role(["advocate", "admin"]))
 ):
     file_path = os.path.join(UPLOAD_DIR, filename)
     if os.path.exists(file_path):
@@ -751,78 +494,84 @@ async def get_screenshot(
 
 @app.put("/api/verification/{earning_id}/approve")
 async def approve_earning(
-    earning_id: int,
+    earning_id: str,
     action: VerificationAction,
-    current_worker_id: int = Depends(require_role(["advocate", "admin"])),
-    db: Session = Depends(get_db)
+    current_worker_id: str = Depends(require_role(["advocate", "admin"]))
 ):
-    earning = db.query(Earning).filter(Earning.id == earning_id).first()
+    from bson import ObjectId
+    earning = await earnings_collection.find_one({"_id": ObjectId(earning_id)})
     if not earning:
         raise HTTPException(404, "Earning not found")
     
-    earning.verified = "approved"
-    earning.verified_by = action.verified_by
-    earning.verified_at = datetime.utcnow()
-    db.commit()
+    await earnings_collection.update_one(
+        {"_id": ObjectId(earning_id)},
+        {"$set": {
+            "verified": "approved",
+            "verified_by": action.verified_by,
+            "verified_at": datetime.utcnow()
+        }}
+    )
     
     return {
         "success": True,
         "message": "Earning approved successfully",
-        "earning_id": earning.id,
-        "verified": earning.verified
+        "earning_id": earning_id,
+        "verified": "approved"
     }
 
 @app.put("/api/verification/{earning_id}/flag")
 async def flag_earning(
-    earning_id: int,
+    earning_id: str,
     action: VerificationAction,
-    current_worker_id: int = Depends(require_role(["advocate", "admin"])),
-    db: Session = Depends(get_db)
+    current_worker_id: str = Depends(require_role(["advocate", "admin"]))
 ):
-    earning = db.query(Earning).filter(Earning.id == earning_id).first()
+    from bson import ObjectId
+    earning = await earnings_collection.find_one({"_id": ObjectId(earning_id)})
     if not earning:
         raise HTTPException(404, "Earning not found")
     
-    earning.verified = "flagged"
-    earning.verified_by = action.verified_by
-    earning.verified_at = datetime.utcnow()
-    earning.flag_reason = action.flag_reason or "Suspicious activity detected"
-    db.commit()
+    await earnings_collection.update_one(
+        {"_id": ObjectId(earning_id)},
+        {"$set": {
+            "verified": "flagged",
+            "verified_by": action.verified_by,
+            "verified_at": datetime.utcnow(),
+            "flag_reason": action.flag_reason or "Suspicious activity detected"
+        }}
+    )
     
     return {
         "success": True,
         "message": "Earning flagged for review",
-        "earning_id": earning.id,
-        "verified": earning.verified,
-        "flag_reason": earning.flag_reason
+        "earning_id": earning_id,
+        "verified": "flagged",
+        "flag_reason": action.flag_reason
     }
 
 # ==========================================
-# ADMIN-ONLY API ENDPOINTS
+# ADMIN-ONLY ENDPOINTS
 # ==========================================
 
 @app.get("/api/admin/workers")
-async def get_all_workers(
-    current_worker_id: int = Depends(require_role(["admin"])),
-    db: Session = Depends(get_db)
-):
-    workers = db.query(Worker).all()
+async def get_all_workers(current_worker_id: str = Depends(require_role(["admin"]))):
+    workers_cursor = workers_collection.find()
+    workers = await workers_cursor.to_list(length=1000)
     
     return {
         "success": True,
         "count": len(workers),
         "workers": [
             {
-                "id": w.id,
-                "name": w.name,
-                "email": w.email,
-                "phone": w.phone,
-                "city": w.city,
-                "platform": w.platform,
-                "role": w.role,
-                "total_earnings": w.total_earnings,
-                "is_active": w.is_active,
-                "created_at": w.created_at
+                "id": str(w["_id"]),
+                "name": w["name"],
+                "email": w["email"],
+                "phone": w["phone"],
+                "city": w["city"],
+                "platform": w["platform"],
+                "role": w.get("role", "worker"),
+                "total_earnings": w.get("total_earnings", 0),
+                "is_active": w.get("is_active", True),
+                "created_at": w["created_at"]
             }
             for w in workers
         ]
@@ -830,61 +579,62 @@ async def get_all_workers(
 
 @app.put("/api/admin/workers/{worker_id}/role")
 async def update_worker_role(
-    worker_id: int,
+    worker_id: str,
     role_update: RoleUpdate,
-    current_worker_id: int = Depends(require_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_worker_id: str = Depends(require_role(["admin"]))
 ):
+    from bson import ObjectId
     if role_update.role not in ["worker", "advocate", "admin"]:
         raise HTTPException(400, "Invalid role. Must be: worker, advocate, admin")
     
-    worker = db.query(Worker).filter(Worker.id == worker_id).first()
+    worker = await workers_collection.find_one({"_id": ObjectId(worker_id)})
     if not worker:
         raise HTTPException(404, "Worker not found")
     
-    worker.role = role_update.role
-    db.commit()
+    await workers_collection.update_one(
+        {"_id": ObjectId(worker_id)},
+        {"$set": {"role": role_update.role}}
+    )
     
     return {
         "success": True,
         "message": f"Worker role updated to {role_update.role}",
-        "worker_id": worker.id,
-        "new_role": worker.role
+        "worker_id": worker_id,
+        "new_role": role_update.role
     }
 
 @app.put("/api/admin/workers/{worker_id}/status")
 async def update_worker_status(
-    worker_id: int,
+    worker_id: str,
     is_active: bool,
-    current_worker_id: int = Depends(require_role(["admin"])),
-    db: Session = Depends(get_db)
+    current_worker_id: str = Depends(require_role(["admin"]))
 ):
-    worker = db.query(Worker).filter(Worker.id == worker_id).first()
+    from bson import ObjectId
+    worker = await workers_collection.find_one({"_id": ObjectId(worker_id)})
     if not worker:
         raise HTTPException(404, "Worker not found")
     
-    worker.is_active = is_active
-    db.commit()
+    await workers_collection.update_one(
+        {"_id": ObjectId(worker_id)},
+        {"$set": {"is_active": is_active}}
+    )
     
     return {
         "success": True,
         "message": f"Worker {'activated' if is_active else 'deactivated'}",
-        "worker_id": worker.id,
-        "is_active": worker.is_active
+        "worker_id": worker_id,
+        "is_active": is_active
     }
 
 @app.get("/api/admin/stats")
-async def get_admin_stats(
-    current_worker_id: int = Depends(require_role(["admin"])),
-    db: Session = Depends(get_db)
-):
-    total_workers = db.query(Worker).filter(Worker.role == "worker").count()
-    total_advocates = db.query(Worker).filter(Worker.role == "advocate").count()
-    total_admins = db.query(Worker).filter(Worker.role == "admin").count()
-    total_earnings = db.query(Earning).count()
-    total_approved = db.query(Earning).filter(Earning.verified == "approved").count()
-    total_pending = db.query(Earning).filter(Earning.verified == "pending").count()
-    total_flagged = db.query(Earning).filter(Earning.verified == "flagged").count()
+async def get_admin_stats(current_worker_id: str = Depends(require_role(["admin"]))):
+    total_workers = await workers_collection.count_documents({"role": "worker"})
+    total_advocates = await workers_collection.count_documents({"role": "advocate"})
+    total_admins = await workers_collection.count_documents({"role": "admin"})
+    total_earnings = await earnings_collection.count_documents({})
+    total_approved = await earnings_collection.count_documents({"verified": "approved"})
+    total_pending = await earnings_collection.count_documents({"verified": "pending"})
+    total_flagged = await earnings_collection.count_documents({"verified": "flagged"})
     
     return {
         "success": True,
@@ -904,56 +654,27 @@ async def get_admin_stats(
         }
     }
 
-    # ==========================================
-# TOKEN REFRESH ENDPOINT
 # ==========================================
-
-@app.post("/api/auth/refresh")
-async def refresh_token(
-    current_worker: Worker = Depends(get_current_worker)
-):
-    """Generate new access token using existing valid token"""
-    
-    # Create new token
-    new_token = create_token({"sub": current_worker.email, "worker_id": current_worker.id})
-    
-    return {
-        "success": True,
-        "token": new_token,
-        "token_type": "bearer"
-    }
+# CSV IMPORT
 # ==========================================
-# CSV IMPORT FOR EARNINGS (Bulk Upload)
-# ==========================================
-
-
 
 @app.post("/api/earnings/csv-import")
 async def import_earnings_csv(
     file: UploadFile = File(...),
-    current_worker: Worker = Depends(get_current_worker),
-    db: Session = Depends(get_db)
+    current_worker: dict = Depends(get_current_worker)
 ):
-    """Bulk import earnings from CSV file"""
-    
-    # Only workers can import their own earnings
-    if current_worker.role != "worker":
+    if current_worker.get("role") != "worker":
         raise HTTPException(403, "Only workers can import earnings")
     
-    # Check file type
     if not file.filename.endswith('.csv'):
         raise HTTPException(400, "Only CSV files are allowed")
     
     try:
-        # Read CSV content
         content = await file.read()
         csv_text = content.decode('utf-8')
         csv_reader = csv.DictReader(io.StringIO(csv_text))
         
-        # Expected CSV headers
         expected_headers = ['date', 'platform', 'hours', 'gross', 'deductions', 'net']
-        
-        # Validate headers
         headers = csv_reader.fieldnames
         if not headers or not all(h in headers for h in expected_headers):
             raise HTTPException(400, f"CSV must have columns: {', '.join(expected_headers)}")
@@ -961,9 +682,8 @@ async def import_earnings_csv(
         imported_count = 0
         errors = []
         
-        for row_num, row in enumerate(csv_reader, start=2):  # Start at 2 (header is row 1)
+        for row_num, row in enumerate(csv_reader, start=2):
             try:
-                # Parse and validate data
                 date = row.get('date', '').strip()
                 platform = row.get('platform', '').strip()
                 hours = float(row.get('hours', 0))
@@ -971,7 +691,6 @@ async def import_earnings_csv(
                 deductions = float(row.get('deductions', 0))
                 net = float(row.get('net', 0))
                 
-                # Validate required fields
                 if not date or not platform:
                     errors.append(f"Row {row_num}: Missing date or platform")
                     continue
@@ -980,20 +699,27 @@ async def import_earnings_csv(
                     errors.append(f"Row {row_num}: Net amount must be greater than 0")
                     continue
                 
-                # Create earning record
-                new_earning = Earning(
-                    worker_id=current_worker.id,
-                    amount=net,
-                    platform=platform,
-                    date=date,
-                    hours=hours,
-                    gross=gross,
-                    deductions=deductions,
-                    screenshot=None,  # No screenshot for CSV import
-                    verified="pending"  # Needs verification
+                new_earning = {
+                    "worker_id": str(current_worker["_id"]),
+                    "amount": net,
+                    "platform": platform,
+                    "date": date,
+                    "hours": hours,
+                    "gross": gross,
+                    "deductions": deductions,
+                    "screenshot": None,
+                    "verified": "pending",
+                    "verified_by": None,
+                    "verified_at": None,
+                    "flag_reason": None,
+                    "created_at": datetime.utcnow()
+                }
+                
+                await earnings_collection.insert_one(new_earning)
+                await workers_collection.update_one(
+                    {"_id": current_worker["_id"]},
+                    {"$inc": {"total_earnings": net}}
                 )
-                db.add(new_earning)
-                current_worker.total_earnings += net
                 imported_count += 1
                 
             except ValueError as e:
@@ -1001,23 +727,187 @@ async def import_earnings_csv(
             except Exception as e:
                 errors.append(f"Row {row_num}: {str(e)}")
         
-        db.commit()
-        
         return {
             "success": True,
             "message": f"CSV import completed",
             "imported_count": imported_count,
             "error_count": len(errors),
-            "errors": errors[:10]  # Return first 10 errors only
+            "errors": errors[:10]
         }
         
     except Exception as e:
         raise HTTPException(500, f"CSV import failed: {str(e)}")
 
+# ==========================================
+# ANALYTICS ENDPOINTS
+# ==========================================
 
+@app.get("/api/analytics/platform-commissions")
+async def get_platform_commissions(
+    platform: Optional[str] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None
+):
+    filter_query = {
+        "gross": {"$ne": None},
+        "deductions": {"$ne": None}
+    }
+    if platform:
+        filter_query["platform"] = platform
+    if start_date:
+        filter_query["date"] = {"$gte": start_date}
+    if end_date:
+        if "date" in filter_query:
+            filter_query["date"]["$lte"] = end_date
+        else:
+            filter_query["date"] = {"$lte": end_date}
+    
+    earnings_cursor = earnings_collection.find(filter_query)
+    earnings = await earnings_cursor.to_list(length=10000)
+    
+    commission_data = []
+    platform_stats = {}
+    
+    for earning in earnings:
+        if earning.get("gross", 0) > 0:
+            commission_percent = (earning.get("deductions", 0) / earning["gross"]) * 100
+        else:
+            commission_percent = 0
+        
+        commission_data.append({
+            "platform": earning["platform"],
+            "date": earning["date"],
+            "commission_percent": round(commission_percent, 2),
+            "gross": earning["gross"],
+            "deductions": earning.get("deductions", 0)
+        })
+        
+        if earning["platform"] not in platform_stats:
+            platform_stats[earning["platform"]] = {
+                "total_commissions": 0,
+                "total_gross": 0,
+                "count": 0
+            }
+        platform_stats[earning["platform"]]["total_commissions"] += earning.get("deductions", 0)
+        platform_stats[earning["platform"]]["total_gross"] += earning["gross"]
+        platform_stats[earning["platform"]]["count"] += 1
+    
+    platform_averages = {}
+    for plat, stats in platform_stats.items():
+        if stats["total_gross"] > 0:
+            platform_averages[plat] = round((stats["total_commissions"] / stats["total_gross"]) * 100, 2)
+        else:
+            platform_averages[plat] = 0
+    
+    return {
+        "success": True,
+        "platform_averages": platform_averages,
+        "trend_data": commission_data[-50:],
+        "total_records": len(commission_data)
+    }
+
+@app.get("/api/analytics/earnings-trends")
+async def get_earnings_trends(
+    period: str = "weekly",
+    current_worker: dict = Depends(get_current_worker)
+):
+    earnings_cursor = earnings_collection.find({"worker_id": str(current_worker["_id"])})
+    earnings = await earnings_cursor.to_list(length=1000)
+    
+    if period == "weekly":
+        trends = {}
+        for earning in earnings:
+            earning_date = datetime.strptime(earning["date"], "%Y-%m-%d")
+            week_key = f"{earning_date.year}-W{earning_date.isocalendar()[1]}"
+            
+            if week_key not in trends:
+                trends[week_key] = {
+                    "week": week_key,
+                    "total_earnings": 0,
+                    "total_hours": 0,
+                    "count": 0
+                }
+            trends[week_key]["total_earnings"] += earning["amount"]
+            trends[week_key]["total_hours"] += earning.get("hours", 0)
+            trends[week_key]["count"] += 1
+        
+        for week in trends.values():
+            if week["total_hours"] > 0:
+                week["hourly_rate"] = round(week["total_earnings"] / week["total_hours"], 2)
+            else:
+                week["hourly_rate"] = 0
+        
+        return {
+            "success": True,
+            "period": "weekly",
+            "trends": list(trends.values())
+        }
+    
+    elif period == "monthly":
+        trends = {}
+        for earning in earnings:
+            earning_date = datetime.strptime(earning["date"], "%Y-%m-%d")
+            month_key = f"{earning_date.year}-{earning_date.month:02d}"
+            
+            if month_key not in trends:
+                trends[month_key] = {
+                    "month": month_key,
+                    "total_earnings": 0,
+                    "total_hours": 0,
+                    "count": 0
+                }
+            trends[month_key]["total_earnings"] += earning["amount"]
+            trends[month_key]["total_hours"] += earning.get("hours", 0)
+            trends[month_key]["count"] += 1
+        
+        for month in trends.values():
+            if month["total_hours"] > 0:
+                month["hourly_rate"] = round(month["total_earnings"] / month["total_hours"], 2)
+            else:
+                month["hourly_rate"] = 0
+        
+        return {
+            "success": True,
+            "period": "monthly",
+            "trends": list(trends.values())
+        }
+    
+    else:
+        raise HTTPException(400, "Period must be 'weekly' or 'monthly'")
+
+@app.get("/api/analytics/hourly-rate")
+async def get_hourly_rate_trend(current_worker: dict = Depends(get_current_worker)):
+    filter_query = {
+        "worker_id": str(current_worker["_id"]),
+        "hours": {"$ne": None, "$gt": 0}
+    }
+    earnings_cursor = earnings_collection.find(filter_query).sort("date", 1)
+    earnings = await earnings_cursor.to_list(length=1000)
+    
+    hourly_rates = []
+    for earning in earnings:
+        hourly_rate = earning["amount"] / earning["hours"]
+        hourly_rates.append({
+            "date": earning["date"],
+            "hourly_rate": round(hourly_rate, 2),
+            "amount": earning["amount"],
+            "hours": earning["hours"],
+            "platform": earning["platform"]
+        })
+    
+    if hourly_rates:
+        avg_hourly_rate = sum(h["hourly_rate"] for h in hourly_rates) / len(hourly_rates)
+    else:
+        avg_hourly_rate = 0
+    
+    return {
+        "success": True,
+        "average_hourly_rate": round(avg_hourly_rate, 2),
+        "trend": hourly_rates[-30:],
+        "total_shifts": len(hourly_rates)
+    }
 
 if __name__ == "__main__":
     import uvicorn
-    import os
     port = int(os.getenv("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
